@@ -43,7 +43,7 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
     bg.style.top = "0";
     bg.style.width = "100%";
     bg.style.height = "100%";
-    bg.style.background = "#b8e676";
+    bg.style.background = "#A368FC";
     bg.style.borderRadius = "8px";
     wrap.appendChild(bg);
 
