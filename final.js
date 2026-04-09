@@ -11,7 +11,7 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
       Object.assign(wrap.style, {
         position: "fixed",
         left: "6px",
-        top: "80px",
+        top: "90px",
         width: "150px",
         height: "70px",
         zIndex: "2147483647",
@@ -36,7 +36,7 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
       Object.assign(img.style, {
         position: "absolute",
         left: "6px",
-        top: "10px",
+        top: "30px",
         width: "138px",
         height: "auto"
       });
