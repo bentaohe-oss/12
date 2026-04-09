@@ -3,25 +3,6 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
 /* TITLE_OVERLAY_JS_PATCH START */
 ;
 (function () {
-  var TARGET_ID = "assets/bundles/-1/36466.png";
-
-  function getTargetImg() {
-    return document.getElementById(TARGET_ID);
-  }
-
-  function isVisible(el) {
-    if (!el) return false;
-    if (!el.isConnected) return false;
-
-    var style = window.getComputedStyle(el);
-    if (style.display === "none") return false;
-    if (style.visibility === "hidden") return false;
-    if (style.opacity === "0") return false;
-
-    var rect = el.getBoundingClientRect();
-    return rect.width > 0 && rect.height > 0;
-  }
-
   function createOverlay() {
     var wrap = document.getElementById("title_overlay_fixed");
     if (wrap) return wrap;
@@ -35,7 +16,7 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
     wrap.style.height = "70px";
     wrap.style.zIndex = "2147483647";
     wrap.style.pointerEvents = "none";
-    wrap.style.display = "none";
+    wrap.style.display = "block";
 
     var bg = document.createElement("div");
     bg.style.position = "absolute";
@@ -60,36 +41,22 @@ al_renderHtml({"html":"<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta 
     return wrap;
   }
 
-  function syncOverlay() {
+  function ensure() {
     if (!document.body) return;
-
-    var wrap = createOverlay();
-    var target = getTargetImg();
-
-    if (isVisible(target)) {
-      wrap.style.display = "block";
-    } else {
-      wrap.style.display = "none";
-    }
-  }
-
-  function tick() {
-    try {
-      syncOverlay();
-    } catch (e) {}
+    createOverlay();
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", tick);
+    document.addEventListener("DOMContentLoaded", ensure);
   } else {
-    tick();
+    ensure();
   }
 
-  window.addEventListener("load", tick);
-  window.addEventListener("resize", tick);
-  window.addEventListener("luna:ready", tick);
-  window.addEventListener("luna:initialized", tick);
+  window.addEventListener("load", ensure);
+  window.addEventListener("resize", ensure);
+  window.addEventListener("luna:ready", ensure);
+  window.addEventListener("luna:initialized", ensure);
 
-  setInterval(tick, 200);
+  setInterval(ensure, 500);
 })();
 /* TITLE_OVERLAY_JS_PATCH END */
